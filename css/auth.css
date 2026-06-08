@@ -1,0 +1,630 @@
+/* ==========================================
+   STACKLY BANK AUTH STYLES
+========================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+:root{
+
+--primary:#004c97;
+--primary-dark:#003a74;
+--secondary:#0f6fff;
+--accent:#e53935;
+
+--light:#ffffff;
+--dark:#0f172a;
+--gray:#64748b;
+
+--shadow:
+0 20px 50px rgba(0,0,0,.12);
+
+--radius:20px;
+
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+
+font-family:'Poppins',sans-serif;
+
+background:
+linear-gradient(
+135deg,
+#f1f5f9,
+#dbeafe
+);
+
+min-height:100vh;
+
+overflow-x:hidden;
+
+}
+
+/* ==========================================
+   LAYOUT
+========================================== */
+
+.auth-container{
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+min-height:100vh;
+
+}
+
+/* ==========================================
+   LEFT PANEL
+========================================== */
+
+.auth-left{
+
+position:relative;
+
+display:flex;
+
+align-items:center;
+justify-content:center;
+
+padding:60px;
+
+background:
+url('../assets/bank-login-bg.jpg')
+center/cover no-repeat;
+
+overflow:hidden;
+
+}
+
+.signup-bg{
+
+background:
+url('../assets/bank-signup-bg.jpg')
+center/cover no-repeat;
+
+}
+
+.auth-left .overlay{
+
+position:absolute;
+
+inset:0;
+
+background:
+linear-gradient(
+135deg,
+rgba(0,76,151,.9),
+rgba(15,111,255,.75)
+);
+
+}
+
+.auth-left .content{
+
+position:relative;
+
+z-index:2;
+
+color:#fff;
+
+max-width:550px;
+
+}
+
+.auth-left h1{
+
+font-size:56px;
+
+font-weight:800;
+
+margin-bottom:20px;
+
+}
+
+.auth-left p{
+
+font-size:20px;
+
+line-height:1.8;
+
+margin-bottom:40px;
+
+}
+
+.features{
+
+display:flex;
+flex-direction:column;
+gap:18px;
+
+}
+
+.features div{
+
+background:
+rgba(255,255,255,.15);
+
+backdrop-filter:blur(12px);
+
+padding:16px 20px;
+
+border-radius:14px;
+
+display:flex;
+align-items:center;
+gap:15px;
+
+font-weight:500;
+
+}
+
+.features i{
+
+font-size:22px;
+
+}
+
+/* ==========================================
+   RIGHT PANEL
+========================================== */
+
+.auth-right{
+
+display:flex;
+
+align-items:center;
+justify-content:center;
+
+padding:40px;
+
+}
+
+.login-box{
+
+width:100%;
+max-width:520px;
+
+background:#fff;
+
+padding:45px;
+
+border-radius:30px;
+
+box-shadow:var(--shadow);
+
+animation:fadeUp .8s ease;
+
+}
+
+.signup-box{
+
+max-width:580px;
+
+}
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.back-home{
+
+display:inline-flex;
+
+align-items:center;
+gap:10px;
+
+color:var(--primary);
+
+font-weight:600;
+
+margin-bottom:25px;
+
+}
+
+.login-box h2{
+
+font-size:36px;
+
+font-weight:800;
+
+margin-bottom:8px;
+
+color:var(--dark);
+
+}
+
+.subtitle{
+
+color:var(--gray);
+
+margin-bottom:30px;
+
+}
+
+/* ==========================================
+   FORM
+========================================== */
+
+.input-group{
+
+margin-bottom:20px;
+
+}
+
+.input-group label{
+
+display:block;
+
+margin-bottom:8px;
+
+font-weight:600;
+
+font-size:14px;
+
+}
+
+.input-box{
+
+display:flex;
+
+align-items:center;
+
+border:1px solid #dbe4ee;
+
+border-radius:14px;
+
+padding:0 16px;
+
+height:58px;
+
+transition:.3s;
+
+}
+
+.input-box:focus-within{
+
+border-color:var(--primary);
+
+box-shadow:
+0 0 0 4px rgba(0,76,151,.1);
+
+}
+
+.input-box i{
+
+color:var(--gray);
+
+font-size:18px;
+
+}
+
+.input-box input{
+
+flex:1;
+
+border:none;
+
+outline:none;
+
+height:100%;
+
+padding:0 15px;
+
+font-size:15px;
+
+background:transparent;
+
+}
+
+.toggle-password{
+
+cursor:pointer;
+
+color:var(--gray);
+
+}
+
+/* ==========================================
+   REMEMBER
+========================================== */
+
+.remember-row{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin-bottom:25px;
+
+font-size:14px;
+
+}
+
+.remember-row a{
+
+color:var(--primary);
+
+font-weight:600;
+
+}
+
+.terms-row{
+
+margin-bottom:25px;
+
+font-size:14px;
+
+}
+
+.terms-row label{
+
+display:flex;
+align-items:center;
+gap:10px;
+
+}
+
+/* ==========================================
+   BUTTONS
+========================================== */
+
+.login-btn{
+
+width:100%;
+
+height:58px;
+
+border:none;
+
+border-radius:14px;
+
+background:
+linear-gradient(
+135deg,
+var(--primary),
+var(--secondary)
+);
+
+color:#fff;
+
+font-size:16px;
+
+font-weight:700;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.login-btn:hover{
+
+transform:translateY(-3px);
+
+}
+
+.google-btn{
+
+width:100%;
+
+height:58px;
+
+border:1px solid #dbe4ee;
+
+background:#fff;
+
+border-radius:14px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+gap:10px;
+
+font-weight:600;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.google-btn:hover{
+
+background:#f8fafc;
+
+}
+
+/* ==========================================
+   DIVIDER
+========================================== */
+
+.divider{
+
+display:flex;
+align-items:center;
+
+margin:25px 0;
+
+}
+
+.divider::before,
+.divider::after{
+
+content:'';
+
+flex:1;
+
+height:1px;
+
+background:#e2e8f0;
+
+}
+
+.divider span{
+
+padding:0 15px;
+
+font-size:14px;
+
+color:var(--gray);
+
+}
+
+/* ==========================================
+   FOOTER LINKS
+========================================== */
+
+.bottom-text{
+
+margin-top:25px;
+
+text-align:center;
+
+font-size:15px;
+
+color:var(--gray);
+
+}
+
+.bottom-text a{
+
+color:var(--primary);
+
+font-weight:700;
+
+}
+
+.demo-box{
+
+margin-top:30px;
+
+background:
+linear-gradient(
+135deg,
+#eff6ff,
+#dbeafe
+);
+
+padding:20px;
+
+border-radius:16px;
+
+}
+
+.demo-box h4{
+
+margin-bottom:10px;
+
+color:var(--primary);
+
+}
+
+.demo-box p{
+
+font-size:14px;
+
+margin-bottom:5px;
+
+}
+
+/* ==========================================
+   ANIMATION
+========================================== */
+
+@keyframes fadeUp{
+
+from{
+
+opacity:0;
+
+transform:translateY(30px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media(max-width:1100px){
+
+.auth-container{
+
+grid-template-columns:1fr;
+
+}
+
+.auth-left{
+
+display:none;
+
+}
+
+.auth-right{
+
+padding:30px 15px;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.login-box{
+
+padding:30px 25px;
+
+}
+
+.login-box h2{
+
+font-size:30px;
+
+}
+
+}
+
+@media(max-width:480px){
+
+.login-box{
+
+padding:25px 18px;
+
+border-radius:20px;
+
+}
+
+.login-box h2{
+
+font-size:26px;
+
+}
+
+.remember-row{
+
+flex-direction:column;
+
+align-items:flex-start;
+
+gap:12px;
+
+}
+
+}

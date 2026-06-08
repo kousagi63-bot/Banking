@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>STACKLY BANK | Admin Dashboard</title>
+
+<link rel="stylesheet" href="css/dashboard.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            STACKLY
+            <span>BANK</span>
+
+        </div>
+
+        <ul>
+
+            <li class="active">
+                <i class="fa-solid fa-chart-line"></i>
+                Dashboard
+            </li>
+
+            <li>
+                <i class="fa-solid fa-users"></i>
+                Customers
+            </li>
+
+            <li>
+                <i class="fa-solid fa-building-columns"></i>
+                Accounts
+            </li>
+
+            <li>
+                <i class="fa-solid fa-credit-card"></i>
+                Cards
+            </li>
+
+            <li>
+                <i class="fa-solid fa-file-invoice-dollar"></i>
+                Loans
+            </li>
+
+            <li>
+                <i class="fa-solid fa-gear"></i>
+                Settings
+            </li>
+
+        </ul>
+
+        <button onclick="logout()" class="logout-btn">
+
+            <i class="fa-solid fa-right-from-bracket"></i>
+
+            Logout
+
+        </button>
+
+    </aside>
+
+    <!-- MAIN -->
+
+    <main class="main-content">
+
+        <div class="topbar">
+
+            <div>
+
+                <h1>
+                    Welcome Admin
+                </h1>
+
+                <p>
+                    Manage STACKLY BANK operations
+                </p>
+
+            </div>
+
+            <button id="darkToggle">
+
+                <i class="fa-solid fa-moon"></i>
+
+            </button>
+
+        </div>
+
+        <!-- STATS -->
+
+        <div class="stats-grid">
+
+            <div class="stat-card">
+
+                <i class="fa-solid fa-users"></i>
+
+                <h3 id="totalUsers">
+                    0
+                </h3>
+
+                <p>Total Customers</p>
+
+            </div>
+
+            <div class="stat-card">
+
+                <i class="fa-solid fa-wallet"></i>
+
+                <h3>
+                    ₹12.8 Cr
+                </h3>
+
+                <p>Total Deposits</p>
+
+            </div>
+
+            <div class="stat-card">
+
+                <i class="fa-solid fa-file-invoice-dollar"></i>
+
+                <h3>
+                    ₹4.5 Cr
+                </h3>
+
+                <p>Active Loans</p>
+
+            </div>
+
+            <div class="stat-card">
+
+                <i class="fa-solid fa-credit-card"></i>
+
+                <h3>
+                    8,520
+                </h3>
+
+                <p>Active Cards</p>
+
+            </div>
+
+        </div>
+
+        <!-- CHART -->
+
+        <div class="section">
+
+            <div class="section-header">
+
+                <h2>Bank Analytics</h2>
+
+            </div>
+
+            <div class="chart-card">
+
+                <canvas id="adminChart"></canvas>
+
+            </div>
+
+        </div>
+
+        <!-- USERS TABLE -->
+
+        <div class="section">
+
+            <div class="section-header">
+
+                <h2>Registered Customers</h2>
+
+            </div>
+
+            <div class="table-card">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Account No</th>
+                            <th>Balance</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="usersTable">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+        <!-- RECENT REPORTS -->
+
+        <div class="section">
+
+            <div class="section-header">
+
+                <h2>Recent Activity</h2>
+
+            </div>
+
+            <div class="activity-grid">
+
+                <div class="activity-card">
+
+                    <i class="fa-solid fa-user-plus"></i>
+
+                    <h4>New Customer</h4>
+
+                    <p>
+                        Customer registration completed.
+                    </p>
+
+                </div>
+
+                <div class="activity-card">
+
+                    <i class="fa-solid fa-money-bill-transfer"></i>
+
+                    <h4>Fund Transfer</h4>
+
+                    <p>
+                        Large transaction processed.
+                    </p>
+
+                </div>
+
+                <div class="activity-card">
+
+                    <i class="fa-solid fa-file-invoice-dollar"></i>
+
+                    <h4>Loan Approved</h4>
+
+                    <p>
+                        Home loan approved successfully.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script src="js/auth.js"></script>
+<script src="js/dashboard.js"></script>
+
+<script>
+
+requireAdmin();
+
+/* USERS */
+
+const users =
+JSON.parse(
+localStorage.getItem("users")
+) || [];
+
+document.getElementById("totalUsers")
+.innerText =
+users.filter(
+u => u.role === "user"
+).length;
+
+const table =
+document.getElementById("usersTable");
+
+users
+.filter(
+u => u.role === "user"
+)
+.forEach(user => {
+
+table.innerHTML += `
+<tr>
+
+<td>${user.name}</td>
+
+<td>${user.email}</td>
+
+<td>${user.phone || "-"}</td>
+
+<td>${user.accountNumber || "-"}</td>
+
+<td>₹${(user.balance || 0).toLocaleString()}</td>
+
+</tr>
+`;
+
+});
+
+/* CHART */
+
+new Chart(
+document.getElementById("adminChart"),
+{
+
+type:"bar",
+
+data:{
+
+labels:[
+"Savings",
+"Loans",
+"Cards",
+"Insurance",
+"Investments"
+],
+
+datasets:[{
+
+label:"Customers",
+
+data:[
+9500,
+6200,
+8400,
+4100,
+5800
+],
+
+borderWidth:1
+
+}]
+
+},
+
+options:{
+
+responsive:true,
+
+plugins:{
+
+legend:{
+display:true
+}
+
+}
+
+}
+
+});
+
+</script>
+
+</body>
+</html>

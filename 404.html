@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>404 - Page Not Found | STACKLY BANK</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+
+min-height:100vh;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+background:
+linear-gradient(
+135deg,
+#004c97,
+#0f6fff,
+#002b5b
+);
+
+overflow:hidden;
+
+color:#fff;
+
+}
+
+.error-container{
+
+text-align:center;
+
+padding:40px;
+
+max-width:800px;
+
+animation:fadeIn 1s ease;
+
+}
+
+.error-animation{
+
+position:relative;
+
+margin-bottom:30px;
+
+}
+
+.error-animation h1{
+
+font-size:180px;
+
+font-weight:800;
+
+line-height:1;
+
+background:
+linear-gradient(
+90deg,
+#ffffff,
+#dbeafe
+);
+
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+
+text-shadow:
+0 20px 50px rgba(0,0,0,.2);
+
+animation:float 3s ease-in-out infinite;
+
+}
+
+.error-animation i{
+
+font-size:90px;
+
+position:absolute;
+
+top:50%;
+left:50%;
+
+transform:
+translate(-50%,-50%);
+
+color:#ffd700;
+
+animation:spin 6s linear infinite;
+
+}
+
+.error-container h2{
+
+font-size:40px;
+
+margin-bottom:15px;
+
+font-weight:700;
+
+}
+
+.error-container p{
+
+font-size:18px;
+
+opacity:.9;
+
+line-height:1.8;
+
+margin-bottom:35px;
+
+}
+
+.btn-group{
+
+display:flex;
+justify-content:center;
+gap:20px;
+flex-wrap:wrap;
+
+}
+
+.btn{
+
+padding:15px 30px;
+
+border:none;
+
+border-radius:50px;
+
+font-size:16px;
+
+font-weight:600;
+
+cursor:pointer;
+
+text-decoration:none;
+
+transition:.3s;
+
+}
+
+.home-btn{
+
+background:#fff;
+
+color:#004c97;
+
+}
+
+.home-btn:hover{
+
+transform:translateY(-5px);
+
+}
+
+.back-btn{
+
+background:
+rgba(255,255,255,.15);
+
+backdrop-filter:blur(10px);
+
+border:
+1px solid rgba(255,255,255,.2);
+
+color:#fff;
+
+}
+
+.back-btn:hover{
+
+transform:translateY(-5px);
+
+}
+
+.timer{
+
+margin-top:30px;
+
+font-size:16px;
+
+opacity:.9;
+
+}
+
+.bubbles{
+
+position:absolute;
+
+width:100%;
+height:100%;
+
+overflow:hidden;
+
+z-index:-1;
+
+}
+
+.bubbles span{
+
+position:absolute;
+
+display:block;
+
+width:30px;
+height:30px;
+
+background:
+rgba(255,255,255,.15);
+
+border-radius:50%;
+
+animation:rise 20s linear infinite;
+
+bottom:-150px;
+
+}
+
+.bubbles span:nth-child(1){
+left:10%;
+width:20px;
+height:20px;
+animation-duration:12s;
+}
+
+.bubbles span:nth-child(2){
+left:25%;
+width:40px;
+height:40px;
+animation-duration:18s;
+}
+
+.bubbles span:nth-child(3){
+left:40%;
+width:25px;
+height:25px;
+animation-duration:15s;
+}
+
+.bubbles span:nth-child(4){
+left:60%;
+width:50px;
+height:50px;
+animation-duration:20s;
+}
+
+.bubbles span:nth-child(5){
+left:80%;
+width:35px;
+height:35px;
+animation-duration:16s;
+}
+
+@keyframes rise{
+
+0%{
+transform:translateY(0) rotate(0deg);
+opacity:0;
+}
+
+30%{
+opacity:1;
+}
+
+100%{
+transform:translateY(-1200px) rotate(360deg);
+opacity:0;
+}
+
+}
+
+@keyframes float{
+
+0%,100%{
+transform:translateY(0);
+}
+
+50%{
+transform:translateY(-20px);
+}
+
+}
+
+@keyframes spin{
+
+100%{
+transform:
+translate(-50%,-50%)
+rotate(360deg);
+}
+
+}
+
+@keyframes fadeIn{
+
+from{
+opacity:0;
+transform:translateY(30px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+@media(max-width:768px){
+
+.error-animation h1{
+
+font-size:120px;
+
+}
+
+.error-container h2{
+
+font-size:28px;
+
+}
+
+.error-container p{
+
+font-size:16px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="bubbles">
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+</div>
+
+<div class="error-container">
+
+<div class="error-animation">
+
+<h1>404</h1>
+
+<i class="fa-solid fa-building-columns"></i>
+
+</div>
+
+<h2>Oops! Page Not Found</h2>
+
+<p>
+
+The page you are looking for does not exist,
+has been moved, or is temporarily unavailable.
+
+</p>
+
+<div class="btn-group">
+
+<a href="index.html" class="btn home-btn">
+
+<i class="fa-solid fa-house"></i>
+Back To Home
+
+</a>
+
+<a href="javascript:history.back()" class="btn back-btn">
+
+<i class="fa-solid fa-arrow-left"></i>
+Go Back
+
+</a>
+
+</div>
+
+<div class="timer">
+
+Redirecting to Home in
+<span id="countdown">10</span>
+seconds...
+
+</div>
+
+</div>
+
+<script>
+
+let seconds = 10;
+
+const countdown =
+document.getElementById("countdown");
+
+const timer = setInterval(() => {
+
+seconds--;
+
+countdown.innerText = seconds;
+
+if(seconds <= 0){
+
+clearInterval(timer);
+
+window.location.href =
+"index.html";
+
+}
+
+},1000);
+
+</script>
+
+</body>
+</html>

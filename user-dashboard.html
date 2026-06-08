@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>STACKLY BANK | User Dashboard</title>
+
+<link rel="stylesheet" href="css/dashboard.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            STACKLY
+            <span>BANK</span>
+
+        </div>
+
+        <ul>
+
+            <li class="active">
+                <i class="fa-solid fa-house"></i>
+                Dashboard
+            </li>
+
+            <li>
+                <i class="fa-solid fa-money-bill-transfer"></i>
+                Transfer Money
+            </li>
+
+            <li>
+                <i class="fa-solid fa-clock-rotate-left"></i>
+                Transactions
+            </li>
+
+            <li>
+                <i class="fa-solid fa-credit-card"></i>
+                Cards
+            </li>
+
+            <li>
+                <i class="fa-solid fa-file-invoice-dollar"></i>
+                Loans
+            </li>
+
+            <li>
+                <i class="fa-solid fa-user"></i>
+                Profile
+            </li>
+
+        </ul>
+
+        <button onclick="logout()" class="logout-btn">
+
+            <i class="fa-solid fa-right-from-bracket"></i>
+
+            Logout
+
+        </button>
+
+    </aside>
+
+    <!-- MAIN CONTENT -->
+
+    <main class="main-content">
+
+        <!-- TOPBAR -->
+
+        <div class="topbar">
+
+            <div>
+
+                <h1>
+                    Welcome,
+                    <span id="userName">
+                        User
+                    </span>
+                </h1>
+
+                <p>
+                    Manage your banking activities
+                </p>
+
+            </div>
+
+            <div class="top-actions">
+
+                <button id="darkToggle">
+
+                    <i class="fa-solid fa-moon"></i>
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- ACCOUNT CARD -->
+
+        <div class="account-card">
+
+            <div>
+
+                <h4>Total Balance</h4>
+
+                <h2 id="accountBalance">
+
+                    ₹0
+
+                </h2>
+
+                <p id="accountNumber">
+
+                    XXXX XXXX XXXX
+
+                </p>
+
+            </div>
+
+            <i class="fa-solid fa-wallet"></i>
+
+        </div>
+
+        <!-- STATS -->
+
+        <div class="stats-grid">
+
+            <div class="stat-card">
+
+                <i class="fa-solid fa-arrow-down"></i>
+
+                <h3>₹45,000</h3>
+
+                <p>Income</p>
+
+            </div>
+
+            <div class="stat-card">
+
+                <i class="fa-solid fa-arrow-up"></i>
+
+                <h3>₹15,000</h3>
+
+                <p>Expenses</p>
+
+            </div>
+
+            <div class="stat-card">
+
+                <i class="fa-solid fa-credit-card"></i>
+
+                <h3>2</h3>
+
+                <p>Active Cards</p>
+
+            </div>
+
+            <div class="stat-card">
+
+                <i class="fa-solid fa-file-invoice-dollar"></i>
+
+                <h3>1</h3>
+
+                <p>Loans</p>
+
+            </div>
+
+        </div>
+
+        <!-- QUICK ACTIONS -->
+
+        <div class="section">
+
+            <div class="section-header">
+
+                <h2>Quick Actions</h2>
+
+            </div>
+
+            <div class="quick-actions">
+
+                <button id="depositBtn">
+
+                    Deposit ₹1000
+
+                </button>
+
+                <button id="withdrawBtn">
+
+                    Withdraw ₹500
+
+                </button>
+
+                <button id="transferBtn">
+
+                    Transfer ₹200
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- CHART -->
+
+        <div class="section">
+
+            <div class="section-header">
+
+                <h2>Transaction Analytics</h2>
+
+            </div>
+
+            <div class="chart-card">
+
+                <canvas id="userChart"></canvas>
+
+            </div>
+
+        </div>
+
+        <!-- RECENT TRANSACTIONS -->
+
+        <div class="section">
+
+            <div class="section-header">
+
+                <h2>Recent Transactions</h2>
+
+            </div>
+
+            <div class="table-card">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Type</th>
+                            <th>Amount</th>
+                            <th>Date</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="transactionTable">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script src="js/auth.js"></script>
+<script src="js/dashboard.js"></script>
+
+<script>
+
+requireUser();
+
+const user = getCurrentUser();
+
+document.getElementById("userName").innerText =
+user.name;
+
+document.getElementById("accountBalance").innerText =
+"₹" + user.balance.toLocaleString();
+
+document.getElementById("accountNumber").innerText =
+user.accountNumber;
+
+/* TRANSACTIONS */
+
+const table =
+document.getElementById("transactionTable");
+
+if(user.transactions){
+
+user.transactions.forEach(tx => {
+
+table.innerHTML += `
+<tr>
+<td>${tx.type}</td>
+<td>₹${tx.amount}</td>
+<td>${tx.date}</td>
+</tr>
+`;
+
+});
+
+}
+
+/* BUTTONS */
+
+document.getElementById("depositBtn")
+.addEventListener("click",()=>{
+
+addTransaction(
+"Deposit",
+1000
+);
+
+location.reload();
+
+});
+
+document.getElementById("withdrawBtn")
+.addEventListener("click",()=>{
+
+addTransaction(
+"Withdraw",
+-500
+);
+
+location.reload();
+
+});
+
+document.getElementById("transferBtn")
+.addEventListener("click",()=>{
+
+addTransaction(
+"Transfer",
+-200
+);
+
+location.reload();
+
+});
+
+/* CHART */
+
+new Chart(
+document.getElementById("userChart"),
+{
+type:"line",
+
+data:{
+
+labels:[
+"Jan",
+"Feb",
+"Mar",
+"Apr",
+"May",
+"Jun"
+],
+
+datasets:[{
+
+label:"Transactions",
+
+data:[
+12000,
+18000,
+15000,
+24000,
+22000,
+30000
+],
+
+borderWidth:3,
+
+fill:true
+
+}]
+
+},
+
+options:{
+
+responsive:true,
+
+plugins:{
+
+legend:{
+display:true
+}
+
+}
+
+}
+
+});
+
+</script>
+
+</body>
+</html>
