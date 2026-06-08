@@ -1,7 +1,7 @@
 /* ==========================================
    STACKLY BANK - MAIN JS
 ========================================== */
-
+console.log("MAIN JS LOADED");
 document.addEventListener("DOMContentLoaded", () => {
 
     /* ==========================
@@ -44,26 +44,25 @@ document.addEventListener("DOMContentLoaded", () => {
        MOBILE MENU
     ========================== */
 
-    const menuBtn =
-        document.querySelector(".menu-btn");
+    // Mobile Menu Toggle
 
-    const navLinks =
-        document.querySelector(".nav-links");
+const menuBtn = document.querySelector(".menu-btn");
+const navLinks = document.querySelector(".nav-links");
 
-    if (menuBtn && navLinks) {
+menuBtn.addEventListener("click", () => {
+    navLinks.classList.toggle("active");
 
-        menuBtn.addEventListener("click", () => {
+    // Change icon
+    const icon = menuBtn.querySelector("i");
 
-            navLinks.classList.toggle("active");
-
-            menuBtn.innerHTML =
-                navLinks.classList.contains("active")
-                    ? '<i class="fa-solid fa-xmark"></i>'
-                    : '<i class="fa-solid fa-bars"></i>';
-
-        });
-
+    if(navLinks.classList.contains("active")){
+        icon.classList.remove("fa-bars");
+        icon.classList.add("fa-times");
+    } else {
+        icon.classList.remove("fa-times");
+        icon.classList.add("fa-bars");
     }
+});
 
     /* ==========================
        COUNTER ANIMATION
@@ -417,5 +416,22 @@ document
             "404.html";
 
     });
+
+});
+document.addEventListener("DOMContentLoaded", () => {
+
+console.log("MAIN JS LOADED");
+
+const menuBtn = document.querySelector(".menu-btn");
+
+if(menuBtn){
+
+menuBtn.addEventListener("click", () => {
+
+alert("Hamburger clicked");
+
+});
+
+}
 
 });
